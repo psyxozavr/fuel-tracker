@@ -1,5 +1,6 @@
 package com.example.fueltracker.ui.cars
 
+import com.example.fueltracker.util.toDoubleFlexible
 import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
@@ -61,9 +62,9 @@ class CarsActivity : AppCompatActivity() {
             .setPositiveButton("Сохранить") { _, _ ->
                 val name = etName.text.toString().trim()
                 if (name.isEmpty()) return@setPositiveButton
-                val norm = etNorm.text.toString().toDoubleOrNull() ?: 8.0
-                val odo = etOdo.text.toString().toDoubleOrNull() ?: 0.0
-                val fuel = etFuel.text.toString().toDoubleOrNull() ?: 0.0
+                val norm = etNorm.text.toString().toDoubleFlexible() ?: 8.0
+                val odo = etOdo.text.toString().toDoubleFlexible() ?: 0.0
+                val fuel = etFuel.text.toString().toDoubleFlexible() ?: 0.0
                 lifecycleScope.launch {
                     repo.addCar(Car(name = name, normLPer100 = norm,
                         initialOdometer = odo, initialFuel = fuel))
