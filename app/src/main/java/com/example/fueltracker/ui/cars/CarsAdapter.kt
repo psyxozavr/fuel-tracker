@@ -32,7 +32,7 @@ class CarsAdapter(
         holder.name.text = car.name
         holder.info.text = String.format(
             Locale.getDefault(),
-            "Норма: %.1f л/100 км · Одометр: %.0f км · Бак: %.1f л",
+            "Норма: %.2f л/100 км · Одометр: %.0f км · Бак: %.2f л",
             car.normLPer100, car.initialOdometer, car.initialFuel
         )
         holder.itemView.setOnClickListener { onClick(car) }
