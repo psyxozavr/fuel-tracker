@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Fuel Tracker</string>
+    <string name="cars_title">Мои машины</string>
+    <string name="add_car">+ Машина</string>
+    <string name="car_name">Название</string>
+    <string name="car_norm">Норма, л/100 км</string>
+    <string name="car_initial_odometer">Начальный одометр, км</string>
+    <string name="car_initial_fuel">Начальный остаток, л</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+    <string name="delete">Удалить</string>
+    <string name="tab_day">День</string>
+    <string name="tab_month">Месяц</string>
+    <string name="add_day">+ День</string>
+    <string name="day_mileage">Пробег, км</string>
+    <string name="day_refuel">Заправлено, л</string>
+    <string name="month_prev">&lt;</string>
+    <string name="month_next">&gt;</string>
 </resources>
