@@ -4,7 +4,7 @@
     <string name="cars_title">Мои машины</string>
     <string name="add_car">+ Машина</string>
     <string name="car_name">Название</string>
-    <string name="car_norm">Норма, л/100 км</string>
+    <string name="car_norm">Норма, л/100 км (например, 8,00)</string>
     <string name="car_initial_odometer">Начальный одометр, км</string>
     <string name="car_initial_fuel">Начальный остаток, л</string>
     <string name="save">Сохранить</string>
