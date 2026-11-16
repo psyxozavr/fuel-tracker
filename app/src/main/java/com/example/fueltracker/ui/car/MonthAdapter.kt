@@ -33,10 +33,10 @@ class MonthAdapter : RecyclerView.Adapter<MonthAdapter.VH>() {
         holder.date.text = LocalDate.ofEpochDay(d.epochDay).format(fmt)
         holder.odometer.text = String.format(Locale.getDefault(), "%.0f", d.odometer)
         holder.mileage.text = String.format(Locale.getDefault(), "%.0f", d.mileage)
-        holder.startFuel.text = String.format(Locale.getDefault(), "%.1f", d.startFuel)
-        holder.refuel.text = String.format(Locale.getDefault(), "%.1f", d.refuel)
-        holder.consumed.text = String.format(Locale.getDefault(), "%.1f", d.consumed)
-        holder.endFuel.text = String.format(Locale.getDefault(), "%.1f", d.endFuel)
+        holder.startFuel.text = String.format(Locale.getDefault(), "%.3f", d.startFuel)
+holder.refuel.text = String.format(Locale.getDefault(), "%.3f", d.refuel)
+holder.consumed.text = String.format(Locale.getDefault(), "%.3f", d.consumed)
+holder.endFuel.text = String.format(Locale.getDefault(), "%.3f", d.endFuel)
     }
 
     override fun getItemCount(): Int = items.size
