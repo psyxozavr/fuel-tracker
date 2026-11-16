@@ -88,7 +88,7 @@ class MonthFragment : Fragment() {
         val avg = if (totalMileage > 0) totalConsumed / totalMileage * 100 else 0.0
         tv.text = String.format(
             Locale.getDefault(),
-            "Итого: пробег %.0f км · заправлено %.1f л · израсходовано %.1f л · остаток %.1f л · ср. %.2f л/100",
+            "Итого: пробег %.0f км · заправлено %.3f л · израсходовано %.3f л · остаток %.3f л · ср. %.3f л/100",
             totalMileage, totalRefuel, totalConsumed, endFuel, avg
         )
     }
