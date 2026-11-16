@@ -1,5 +1,6 @@
 package com.example.fueltracker.ui.car
 
+import com.example.fueltracker.util.toDoubleFlexible
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -68,8 +69,8 @@ class DayFragment : Fragment() {
 
         dialog.setOnShowListener {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-                val mileage = etMileage.text.toString().toDoubleOrNull() ?: 0.0
-                val refuel = etRefuel.text.toString().toDoubleOrNull() ?: 0.0
+                val mileage = etMileage.text.toString().toDoubleFlexible() ?: 0.0
+                val refuel = etRefuel.text.toString().toDoubleFlexible() ?: 0.0
                 viewLifecycleOwner.lifecycleScope.launch {
                     repo.upsertDay(carId, today.toEpochDay(), mileage, refuel)
                 }
