@@ -9,7 +9,8 @@ import com.example.fueltracker.R
 import com.example.fueltracker.data.Car
 
 class CarsAdapter(
-    private val onClick: (Car) -> Unit
+    private val onClick: (Car) -> Unit,
+    private val onLongClick: (Car) -> Unit
 ) : RecyclerView.Adapter<CarsAdapter.VH>() {
 
     private val items = mutableListOf<Car>()
@@ -30,6 +31,10 @@ class CarsAdapter(
         val car = items[position]
         holder.name.text = car.name
         holder.itemView.setOnClickListener { onClick(car) }
+        holder.itemView.setOnLongClickListener {
+            onLongClick(car)
+            true
+        }
     }
 
     override fun getItemCount(): Int = items.size
