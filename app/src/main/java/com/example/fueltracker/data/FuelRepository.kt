@@ -20,6 +20,30 @@ class FuelRepository(
         val car = carDao.getById(carId) ?: return
         val existing = dayDao.getByDate(carId, epochDay)
 
+        val all = dayDao.getAllForCarSync(carId).sortedBy { it.epochDay }
+        val previous = all.lastOrNull { it.epochDay < epochDay }
+
+        if (previous != null && epochDay - previous.epochDay > 1) {
+            var gapDay = previous.epochDay + 1
+            while (gapDay < epochDay) {
+                if (dayDao.getByDate(carId, gapDay) == null) {
+                    dayDao.insert(
+                        Day(
+                            carId = carId,
+                            epochDay = gapDay,
+                            mileage = 0.0,
+                            odometer = 0.0,
+                            startFuel = 0.0,
+                            refuel = 0.0,
+                            consumed = 0.0,
+                            endFuel = 0.0
+                        )
+                    )
+                }
+                gapDay++
+            }
+        }
+
         if (existing != null) {
             dayDao.update(existing.copy(mileage = mileage, refuel = refuel))
         } else {
@@ -36,7 +60,9 @@ class FuelRepository(
                 )
             )
         }
-        recalculateFrom(car, epochDay)
+
+        val recalcFrom = if (previous != null) previous.epochDay + 1 else epochDay
+        recalculateFrom(car, recalcFrom)
     }
 
     suspend fun deleteDay(carId: Long, epochDay: Long) {
@@ -46,7 +72,6 @@ class FuelRepository(
         recalculateFrom(car, epochDay)
     }
 
-    /** Пересчитывает весь журнал машины с самой ранней даты. */
     suspend fun recalculateAll(car: Car) {
         val all = dayDao.getAllForCarSync(car.id)
         if (all.isEmpty()) return
