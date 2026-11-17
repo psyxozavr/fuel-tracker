@@ -19,6 +19,7 @@ import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Locale
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MonthFragment : Fragment() {
 
@@ -54,7 +55,15 @@ class MonthFragment : Fragment() {
         view.findViewById<Button>(R.id.btnNextMonth).setOnClickListener {
             current = current.plusMonths(1); loadMonth()
         }
-
+        view.findViewById<FloatingActionButton>(R.id.fabAddDayMonth).setOnClickListener {
+    showDayDialog(
+        context = requireContext(),
+        lifecycleOwner = viewLifecycleOwner,
+        repo = repo,
+        carId = carId,
+        existing = null
+    )
+}
         loadMonth()
     }
 
