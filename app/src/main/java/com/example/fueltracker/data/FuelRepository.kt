@@ -16,20 +16,13 @@ class FuelRepository(
     fun getMonthDays(carId: Long, start: Long, end: Long): Flow<List<Day>> =
         dayDao.getForMonth(carId, start, end)
 
-    /**
-     * Добавляет день или обновляет существующий по дате, затем пересчитывает
-     * весь хвост дней этой машины (одометр, остатки, расход) начиная с этой даты.
-     */
     suspend fun upsertDay(carId: Long, epochDay: Long, mileage: Double, refuel: Double) {
         val car = carDao.getById(carId) ?: return
         val existing = dayDao.getByDate(carId, epochDay)
 
         if (existing != null) {
-            dayDao.update(
-                existing.copy(mileage = mileage, refuel = refuel)
-            )
+            dayDao.update(existing.copy(mileage = mileage, refuel = refuel))
         } else {
-            // временная запись, поля пересчитает recalculateFrom
             dayDao.insert(
                 Day(
                     carId = carId,
@@ -53,26 +46,26 @@ class FuelRepository(
         recalculateFrom(car, epochDay)
     }
 
-    /**
-     * Пересчитывает все дни машины с указанной даты (включительно).
-     * Для первого дня цепочки берёт initialOdometer и initialFuel машины.
-     */
+    /** Пересчитывает весь журнал машины с самой ранней даты. */
+    suspend fun recalculateAll(car: Car) {
+        val all = dayDao.getAllForCarSync(car.id)
+        if (all.isEmpty()) return
+        val earliest = all.minOf { it.epochDay }
+        recalculateFrom(car, earliest)
+    }
+
     private suspend fun recalculateFrom(car: Car, fromEpochDay: Long) {
         val all = dayDao.getAllForCarSync(car.id).sortedBy { it.epochDay }
 
-        // находим «предыдущее» состояние до fromEpochDay
         var prevOdometer = car.initialOdometer
         var prevFuel = car.initialFuel
-        var foundPrev = false
 
         for (d in all) {
             if (d.epochDay < fromEpochDay) {
                 prevOdometer = d.odometer
                 prevFuel = d.endFuel
-                foundPrev = true
             }
         }
-        // если before нет — остаются initial значения
 
         val startIndex = all.indexOfFirst { it.epochDay >= fromEpochDay }
         if (startIndex < 0) return
@@ -84,13 +77,12 @@ class FuelRepository(
             val startFuel = prevFuel
             val endFuel = startFuel + d.refuel - consumed
 
-            val updated = d.copy(
+            dayDao.update(d.copy(
                 odometer = odometer,
                 startFuel = startFuel,
                 consumed = consumed,
                 endFuel = endFuel
-            )
-            dayDao.update(updated)
+            ))
 
             prevOdometer = odometer
             prevFuel = endFuel
