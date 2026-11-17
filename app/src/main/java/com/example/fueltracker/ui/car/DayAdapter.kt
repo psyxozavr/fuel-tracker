@@ -3,10 +3,13 @@ package com.example.fueltracker.ui.car
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fueltracker.R
 import com.example.fueltracker.data.Day
+import com.example.fueltracker.util.colorForEpochDay
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -39,12 +42,15 @@ class DayAdapter(
             "Одометр: %.0f км · Пробег: %.0f км · Заправ.: %.3f л · Расход: %.3f л · Кон.: %.3f л",
             d.odometer, d.mileage, d.refuel, d.consumed, d.endFuel
         )
+        val colorRes = colorForEpochDay(d.epochDay)
+        holder.root.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, colorRes))
         holder.itemView.setOnClickListener { onClick(d) }
     }
 
     override fun getItemCount(): Int = items.size
 
     class VH(v: View) : RecyclerView.ViewHolder(v) {
+        val root: LinearLayout = v.findViewById(R.id.rootDay)
         val date: TextView = v.findViewById(R.id.tvDate)
         val details: TextView = v.findViewById(R.id.tvDetails)
     }
