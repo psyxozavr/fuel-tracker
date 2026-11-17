@@ -11,7 +11,9 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-class DayAdapter : RecyclerView.Adapter<DayAdapter.VH>() {
+class DayAdapter(
+    private val onClick: (Day) -> Unit
+) : RecyclerView.Adapter<DayAdapter.VH>() {
 
     private val items = mutableListOf<Day>()
     private val fmt = DateTimeFormatter.ofPattern("dd MMM yyyy", Locale("ru"))
@@ -36,7 +38,8 @@ class DayAdapter : RecyclerView.Adapter<DayAdapter.VH>() {
             Locale.getDefault(),
             "Одометр: %.0f км · Пробег: %.0f км · Заправ.: %.3f л · Расход: %.3f л · Кон.: %.3f л",
             d.odometer, d.mileage, d.refuel, d.consumed, d.endFuel
-)
+        )
+        holder.itemView.setOnClickListener { onClick(d) }
     }
 
     override fun getItemCount(): Int = items.size
