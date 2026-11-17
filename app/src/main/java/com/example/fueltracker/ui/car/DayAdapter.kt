@@ -34,9 +34,9 @@ class DayAdapter : RecyclerView.Adapter<DayAdapter.VH>() {
         holder.date.text = date.format(fmt)
         holder.details.text = String.format(
             Locale.getDefault(),
-            "Пробег: %.0f км · Заправ.: %.3f л · Расход: %.3f л · Кон.: %.3f л",
-            d.mileage, d.refuel, d.consumed, d.endFuel
-        )
+            "Одометр: %.0f км · Пробег: %.0f км · Заправ.: %.3f л · Расход: %.3f л · Кон.: %.3f л",
+            d.odometer, d.mileage, d.refuel, d.consumed, d.endFuel
+)
     }
 
     override fun getItemCount(): Int = items.size
