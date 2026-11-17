@@ -28,15 +28,9 @@ class CarsAdapter(
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        val car = items[position]
-        holder.name.text = car.name
-        holder.info.text = String.format(
-            Locale.getDefault(),
-            "Норма: %.2f л/100 км · Одометр: %.0f км · Бак: %.2f л",
-            car.normLPer100, car.initialOdometer, car.initialFuel
-        )
-        holder.itemView.setOnClickListener { onClick(car) }
-    }
+       val car = items[position]
+holder.name.text = car.name
+holder.itemView.setOnClickListener { onClick(car) }
 
     override fun getItemCount(): Int = items.size
 
