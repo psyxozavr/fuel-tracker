@@ -24,7 +24,7 @@ class DayFragment : Fragment() {
 
     private var carId: Long = 0
     private lateinit var repo: FuelRepository
-    private lateinit var adapter: DayAdapter
+    private lateinit var adapter = DayAdapter { day -> showEditDialog(day) }
 
     companion object {
         fun newInstance(carId: Long) = DayFragment().apply {
