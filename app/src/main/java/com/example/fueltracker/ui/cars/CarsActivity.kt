@@ -52,7 +52,6 @@ class CarsActivity : AppCompatActivity() {
         }
     }
 
-    /** Долгое нажатие: выбор действия над машиной. */
     private fun showCarActions(car: Car) {
         AlertDialog.Builder(this)
             .setTitle(car.name)
@@ -65,7 +64,6 @@ class CarsActivity : AppCompatActivity() {
             .show()
     }
 
-    /** Диалог создания (car == null) или редактирования (car != null). */
     private fun showCarDialog(car: Car?) {
         val view = layoutInflater.inflate(R.layout.dialog_car, null)
         val etName = view.findViewById<EditText>(R.id.etName)
@@ -95,12 +93,18 @@ class CarsActivity : AppCompatActivity() {
                         repo.addCar(Car(name = name, normLPer100 = norm,
                             initialOdometer = odo, initialFuel = fuel))
                     } else {
-                        repo.updateCar(car.copy(
+                        val updated = car.copy(
                             name = name,
                             normLPer100 = norm,
                             initialOdometer = odo,
                             initialFuel = fuel
-                        ))
+                        )
+                        repo.updateCar(updated)
+                        if (updated.normLPer100 != car.normLPer100 ||
+                            updated.initialOdometer != car.initialOdometer ||
+                            updated.initialFuel != car.initialFuel) {
+                            repo.recalculateAll(updated)
+                        }
                     }
                 }
             }
