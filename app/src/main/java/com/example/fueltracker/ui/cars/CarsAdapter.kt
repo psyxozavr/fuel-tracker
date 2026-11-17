@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fueltracker.R
 import com.example.fueltracker.data.Car
-import java.util.Locale
 
 class CarsAdapter(
     private val onClick: (Car) -> Unit
@@ -36,6 +35,5 @@ holder.itemView.setOnClickListener { onClick(car) }
 
     class VH(v: View) : RecyclerView.ViewHolder(v) {
         val name: TextView = v.findViewById(R.id.tvCarName)
-        val info: TextView = v.findViewById(R.id.tvCarInfo)
     }
 }
