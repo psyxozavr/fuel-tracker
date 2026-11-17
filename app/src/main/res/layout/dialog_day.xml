@@ -5,6 +5,12 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <Button
+        android:id="@+id/btnPickDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Дата" />
+
     <EditText
         android:id="@+id/etMileage"
         android:layout_width="match_parent"
