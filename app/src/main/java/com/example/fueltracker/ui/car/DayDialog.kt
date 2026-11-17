@@ -76,10 +76,14 @@ fun showDayDialog(
 
     dialog.setOnShowListener {
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-            val mileage = etMileage.text.toString().toDoubleFlexible()
-            val refuel = etRefuel.text.toString().toDoubleFlexible()
+            val mileageText = etMileage.text.toString().trim()
+            val refuelText = etRefuel.text.toString().trim()
+
+            val mileage = mileageText.toDoubleFlexible()
+            val refuel = if (refuelText.isEmpty()) 0.0 else refuelText.toDoubleFlexible()
+
             if (mileage == null || refuel == null) {
-                Toast.makeText(context, "Введите числа", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Введите корректный пробег", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             lifecycleOwner.lifecycleScope.launch {
