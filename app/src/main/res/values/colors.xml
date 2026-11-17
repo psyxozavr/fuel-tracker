@@ -1,2 +1,5 @@
-<color name="day_working">#FFF9C4</color>      <!-- светло-жёлтый -->
-<color name="day_weekend">#B2EBF2</color>      <!-- светло-бирюзовый -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="day_working">#FFF9C4</color>
+    <color name="day_weekend">#B2EBF2</color>
+</resources>
