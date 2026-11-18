@@ -68,12 +68,14 @@ class CarsActivity : AppCompatActivity() {
         val view = layoutInflater.inflate(R.layout.dialog_car, null)
         val etName = view.findViewById<EditText>(R.id.etName)
         val etNorm = view.findViewById<EditText>(R.id.etNorm)
+        val etWinterNorm = view.findViewById<EditText>(R.id.etWinterNorm)
         val etOdo = view.findViewById<EditText>(R.id.etInitialOdometer)
         val etFuel = view.findViewById<EditText>(R.id.etInitialFuel)
 
         if (car != null) {
             etName.setText(car.name)
             etNorm.setText(car.normLPer100.toString())
+            etWinterNorm.setText(car.winterNormLPer100.toString())
             etOdo.setText(car.initialOdometer.toString())
             etFuel.setText(car.initialFuel.toString())
         }
@@ -85,22 +87,26 @@ class CarsActivity : AppCompatActivity() {
                 val name = etName.text.toString().trim()
                 if (name.isEmpty()) return@setPositiveButton
                 val norm = etNorm.text.toString().toDoubleFlexible() ?: 8.0
+                val winterNorm = etWinterNorm.text.toString().toDoubleFlexible() ?: 8.0
                 val odo = etOdo.text.toString().toDoubleFlexible() ?: 0.0
                 val fuel = etFuel.text.toString().toDoubleFlexible() ?: 0.0
 
                 lifecycleScope.launch {
                     if (car == null) {
                         repo.addCar(Car(name = name, normLPer100 = norm,
+                            winterNormLPer100 = winterNorm,
                             initialOdometer = odo, initialFuel = fuel))
                     } else {
                         val updated = car.copy(
                             name = name,
                             normLPer100 = norm,
+                            winterNormLPer100 = winterNorm,
                             initialOdometer = odo,
                             initialFuel = fuel
                         )
                         repo.updateCar(updated)
                         if (updated.normLPer100 != car.normLPer100 ||
+                            updated.winterNormLPer100 != car.winterNormLPer100 ||
                             updated.initialOdometer != car.initialOdometer ||
                             updated.initialFuel != car.initialFuel) {
                             repo.recalculateAll(updated)
