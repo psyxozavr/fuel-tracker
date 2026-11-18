@@ -7,7 +7,8 @@ import androidx.room.PrimaryKey
 data class Car(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val name: String,
-    val normLPer100: Double,      // норма расхода, л/100 км
-    val initialOdometer: Double,  // начальный одометр, км
-    val initialFuel: Double       // начальный остаток топлива, л
+    val normLPer100: Double,
+    val winterNormLPer100: Double,
+    val initialOdometer: Double,
+    val initialFuel: Double
 )
