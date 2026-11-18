@@ -5,31 +5,9 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <EditText
-        android:id="@+id/etName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/car_name"
-        android:inputType="text" />
-
-    <EditText
-        android:id="@+id/etNorm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/car_norm"
-        android:inputType="numberDecimal" />
-
-    <EditText
-        android:id="@+id/etInitialOdometer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/car_initial_odometer"
-        android:inputType="numberDecimal" />
-
-    <EditText
-        android:id="@+id/etInitialFuel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/car_initial_fuel"
-        android:inputType="numberDecimal" />
+    <EditText android:id="@+id/etName" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/car_name" android:inputType="text" />
+    <EditText android:id="@+id/etNorm" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Летняя норма, л/100 км" android:inputType="numberDecimal" />
+    <EditText android:id="@+id/etWinterNorm" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Зимняя норма, л/100 км" android:inputType="numberDecimal" />
+    <EditText android:id="@+id/etInitialOdometer" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/car_initial_odometer" android:inputType="numberDecimal" />
+    <EditText android:id="@+id/etInitialFuel" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/car_initial_fuel" android:inputType="numberDecimal" />
 </LinearLayout>
