@@ -1,6 +1,7 @@
 package com.example.fueltracker.data
 
 import kotlinx.coroutines.flow.Flow
+import java.time.LocalDate
 
 class FuelRepository(
     private val carDao: CarDao,
@@ -79,6 +80,13 @@ class FuelRepository(
         recalculateFrom(car, earliest)
     }
 
+    private fun normForDate(car: Car, epochDay: Long): Double {
+        val date = LocalDate.ofEpochDay(epochDay)
+        val monthDay = date.monthValue * 100 + date.dayOfMonth
+        val isSummer = monthDay in 416..1015
+        return if (isSummer) car.normLPer100 else car.winterNormLPer100
+    }
+
     private suspend fun recalculateFrom(car: Car, fromEpochDay: Long) {
         val all = dayDao.getAllForCarSync(car.id).sortedBy { it.epochDay }
 
@@ -98,7 +106,7 @@ class FuelRepository(
         for (i in startIndex until all.size) {
             val d = all[i]
             val odometer = prevOdometer + d.mileage
-            val consumed = d.mileage * car.normLPer100 / 100.0
+            val consumed = d.mileage * normForDate(car, d.epochDay) / 100.0
             val startFuel = prevFuel
             val endFuel = startFuel + d.refuel - consumed
 
