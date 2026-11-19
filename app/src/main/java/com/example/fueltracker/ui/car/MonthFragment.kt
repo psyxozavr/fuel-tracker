@@ -14,12 +14,12 @@ import com.example.fueltracker.R
 import com.example.fueltracker.data.AppDatabase
 import com.example.fueltracker.data.Day
 import com.example.fueltracker.data.FuelRepository
+import com.example.fueltracker.util.formatSmart
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Locale
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MonthFragment : Fragment() {
 
@@ -55,15 +55,17 @@ class MonthFragment : Fragment() {
         view.findViewById<Button>(R.id.btnNextMonth).setOnClickListener {
             current = current.plusMonths(1); loadMonth()
         }
+
         view.findViewById<FloatingActionButton>(R.id.fabAddDayMonth).setOnClickListener {
-    showDayDialog(
-        context = requireContext(),
-        lifecycleOwner = viewLifecycleOwner,
-        repo = repo,
-        carId = carId,
-        existing = null
-    )
-}
+            showDayDialog(
+                context = requireContext(),
+                lifecycleOwner = viewLifecycleOwner,
+                repo = repo,
+                carId = carId,
+                existing = null
+            )
+        }
+
         loadMonth()
     }
 
@@ -91,14 +93,7 @@ class MonthFragment : Fragment() {
             return
         }
         val totalMileage = days.sumOf { it.mileage }
-        val totalRefuel = days.sumOf { it.refuel }
         val totalConsumed = days.sumOf { it.consumed }
-        val endFuel = days.last().endFuel
-        val avg = if (totalMileage > 0) totalConsumed / totalMileage * 100 else 0.0
-        tv.text = String.format(
-            Locale.getDefault(),
-            "Итого: пробег %.0f км · заправлено %.3f л · израсходовано %.3f л · остаток %.3f л · ср. %.3f л/100",
-            totalMileage, totalRefuel, totalConsumed, endFuel, avg
-        )
+        tv.text = "Итого: пробег ${totalMileage.formatSmart()} км · израсходовано ${totalConsumed.formatSmart()} л"
     }
 }
