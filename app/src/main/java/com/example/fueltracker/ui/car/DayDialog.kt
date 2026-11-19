@@ -17,11 +17,6 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-/**
- * Показывает диалог добавления/редактирования дня.
- * Если [existing] != null — поля предзаполнены, дата фиксирована на этот день.
- * Иначе — дата по умолчанию «сегодня», пользователь может её поменять.
- */
 fun showDayDialog(
     context: Context,
     lifecycleOwner: LifecycleOwner,
@@ -50,8 +45,9 @@ fun showDayDialog(
     updateDateButton()
 
     if (existing != null) {
-        etMileage.setText(existing.mileage.toString())
-        etRefuel.setText(existing.refuel.toString())
+        // Показываем только ненулевые значения, и без хвостовых нулей
+        if (existing.mileage != 0.0) etMileage.setText(trimZeros(existing.mileage))
+        if (existing.refuel != 0.0) etRefuel.setText(trimZeros(existing.refuel))
     }
 
     btnPickDate.setOnClickListener {
@@ -78,10 +74,8 @@ fun showDayDialog(
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
             val mileageText = etMileage.text.toString().trim()
             val refuelText = etRefuel.text.toString().trim()
-
             val mileage = mileageText.toDoubleFlexible()
             val refuel = if (refuelText.isEmpty()) 0.0 else refuelText.toDoubleFlexible()
-
             if (mileage == null || refuel == null) {
                 Toast.makeText(context, "Введите корректный пробег", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -94,4 +88,10 @@ fun showDayDialog(
         }
     }
     dialog.show()
+}
+
+/** 9.0 -> "9", 2.34 -> "2,34", 0.0 -> "0" (но 0 мы не подставляем). */
+private fun trimZeros(v: Double): String {
+    val s = String.format(Locale.US, "%.3f", v).trimEnd('0').trimEnd('.')
+    return s.replace('.', ',')
 }
