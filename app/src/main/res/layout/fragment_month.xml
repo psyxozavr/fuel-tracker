@@ -27,6 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:textColor="#000000"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -55,13 +56,13 @@
                     android:background="#EEEEEE"
                     android:padding="4dp">
 
-                    <TextView android:layout_width="70dp" android:layout_height="wrap_content" android:text="Дата" android:textStyle="bold" />
-                    <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Одометр" android:textStyle="bold" />
-                    <TextView android:layout_width="70dp" android:layout_height="wrap_content" android:text="Пробег" android:textStyle="bold" />
-                    <TextView android:layout_width="70dp" android:layout_height="wrap_content" android:text="Нач.ост." android:textStyle="bold" />
-                    <TextView android:layout_width="70dp" android:layout_height="wrap_content" android:text="Заправ." android:textStyle="bold" />
-                    <TextView android:layout_width="70dp" android:layout_height="wrap_content" android:text="Расход" android:textStyle="bold" />
-                    <TextView android:layout_width="70dp" android:layout_height="wrap_content" android:text="Ост.кон." android:textStyle="bold" />
+                    <TextView android:layout_width="70dp" android:layout_height="wrap_content" android:text="Дата" android:textColor="#000000" android:textStyle="bold" />
+                    <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Одометр" android:textColor="#000000" android:textStyle="bold" />
+                    <TextView android:layout_width="70dp" android:layout_height="wrap_content" android:text="Пробег" android:textColor="#000000" android:textStyle="bold" />
+                    <TextView android:layout_width="70dp" android:layout_height="wrap_content" android:text="Нач.ост." android:textColor="#000000" android:textStyle="bold" />
+                    <TextView android:layout_width="70dp" android:layout_height="wrap_content" android:text="Заправ." android:textColor="#000000" android:textStyle="bold" />
+                    <TextView android:layout_width="70dp" android:layout_height="wrap_content" android:text="Расход" android:textColor="#000000" android:textStyle="bold" />
+                    <TextView android:layout_width="70dp" android:layout_height="wrap_content" android:text="Ост.кон." android:textColor="#000000" android:textStyle="bold" />
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -77,6 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
+            android:textColor="#000000"
             android:textSize="13sp"
             android:textStyle="bold" />
     </LinearLayout>
