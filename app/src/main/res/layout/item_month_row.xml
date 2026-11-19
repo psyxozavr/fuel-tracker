@@ -6,11 +6,11 @@
     android:orientation="horizontal"
     android:padding="4dp">
 
-    <TextView android:id="@+id/tvDate" android:layout_width="70dp" android:layout_height="wrap_content" android:textColor="#000000" android:textSize="12sp" android:textStyle="bold" />
-    <TextView android:id="@+id/tvOdometer" android:layout_width="80dp" android:layout_height="wrap_content" android:textColor="#000000" android:textSize="12sp" android:textStyle="bold" />
-    <TextView android:id="@+id/tvMileage" android:layout_width="70dp" android:layout_height="wrap_content" android:textColor="#000000" android:textSize="12sp" android:textStyle="bold" />
-    <TextView android:id="@+id/tvStartFuel" android:layout_width="70dp" android:layout_height="wrap_content" android:textColor="#000000" android:textSize="12sp" android:textStyle="bold" />
-    <TextView android:id="@+id/tvRefuel" android:layout_width="70dp" android:layout_height="wrap_content" android:textColor="#000000" android:textSize="12sp" android:textStyle="bold" />
-    <TextView android:id="@+id/tvConsumed" android:layout_width="70dp" android:layout_height="wrap_content" android:textColor="#000000" android:textSize="12sp" android:textStyle="bold" />
-    <TextView android:id="@+id/tvEndFuel" android:layout_width="70dp" android:layout_height="wrap_content" android:textColor="#000000" android:textSize="12sp" android:textStyle="bold" />
+    <TextView android:id="@+id/tvDate" android:layout_width="70dp" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:textSize="12sp" android:textStyle="bold" />
+    <TextView android:id="@+id/tvOdometer" android:layout_width="80dp" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:textSize="12sp" android:textStyle="bold" />
+    <TextView android:id="@+id/tvMileage" android:layout_width="70dp" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:textSize="12sp" android:textStyle="bold" />
+    <TextView android:id="@+id/tvStartFuel" android:layout_width="70dp" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:textSize="12sp" android:textStyle="bold" />
+    <TextView android:id="@+id/tvRefuel" android:layout_width="70dp" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:textSize="12sp" android:textStyle="bold" />
+    <TextView android:id="@+id/tvConsumed" android:layout_width="70dp" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:textSize="12sp" android:textStyle="bold" />
+    <TextView android:id="@+id/tvEndFuel" android:layout_width="70dp" android:layout_height="wrap_content" android:textColor="@color/text_primary" android:textSize="12sp" android:textStyle="bold" />
 </LinearLayout>
