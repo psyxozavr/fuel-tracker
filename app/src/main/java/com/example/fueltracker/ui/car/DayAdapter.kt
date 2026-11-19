@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fueltracker.R
 import com.example.fueltracker.data.Day
 import com.example.fueltracker.util.colorForEpochDay
+import com.example.fueltracker.util.formatSmart
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -38,14 +39,13 @@ class DayAdapter(
         val d = items[position]
         val date = LocalDate.ofEpochDay(d.epochDay)
         holder.date.text = date.format(fmt)
-        holder.details.text = String.format(
-            Locale.getDefault(),
-            "Одометр: %.0f км · Пробег: %.0f км · Заправ.: %.3f л · Расход: %.3f л · Кон.: %.3f л",
-            d.odometer, d.mileage, d.refuel, d.consumed, d.endFuel
-        )
+        holder.details.text = "Одометр: ${d.odometer.formatSmart()} км · " +
+                "Пробег: ${d.mileage.formatSmart()} км · " +
+                "Заправ.: ${d.refuel.formatSmart()} л · " +
+                "Расход: ${d.consumed.formatSmart()} л · " +
+                "Кон.: ${d.endFuel.formatSmart()} л"
         val colorRes = colorForEpochDay(d.epochDay)
         holder.root.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, colorRes))
-        // Всегда чёрный и жирный текст на светлом фоне карточки
         holder.date.setTextColor(Color.BLACK)
         holder.details.setTextColor(Color.BLACK)
         holder.itemView.setOnClickListener { onClick(d) }
