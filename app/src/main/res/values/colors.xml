@@ -2,4 +2,5 @@
 <resources>
     <color name="day_working">#FFF9C4</color>
     <color name="day_weekend">#B2EBF2</color>
+    <color name="text_primary">#000000</color>
 </resources>
