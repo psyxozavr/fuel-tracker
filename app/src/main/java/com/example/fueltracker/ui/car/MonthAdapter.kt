@@ -1,5 +1,6 @@
 package com.example.fueltracker.ui.car
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +43,10 @@ class MonthAdapter : RecyclerView.Adapter<MonthAdapter.VH>() {
         holder.endFuel.text = String.format(Locale.getDefault(), "%.3f", d.endFuel)
         val colorRes = colorForEpochDay(d.epochDay)
         holder.root.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, colorRes))
+        // Всегда чёрный и жирный текст на светлом фоне строки
+        val textViews = listOf(holder.date, holder.odometer, holder.mileage,
+            holder.startFuel, holder.refuel, holder.consumed, holder.endFuel)
+        textViews.forEach { it.setTextColor(Color.BLACK) }
     }
 
     override fun getItemCount(): Int = items.size
