@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fueltracker.R
 import com.example.fueltracker.data.Day
 import com.example.fueltracker.util.colorForEpochDay
+import com.example.fueltracker.util.formatSmart
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -35,15 +36,14 @@ class MonthAdapter : RecyclerView.Adapter<MonthAdapter.VH>() {
     override fun onBindViewHolder(holder: VH, position: Int) {
         val d = items[position]
         holder.date.text = LocalDate.ofEpochDay(d.epochDay).format(fmt)
-        holder.odometer.text = String.format(Locale.getDefault(), "%.0f", d.odometer)
-        holder.mileage.text = String.format(Locale.getDefault(), "%.0f", d.mileage)
-        holder.startFuel.text = String.format(Locale.getDefault(), "%.3f", d.startFuel)
-        holder.refuel.text = String.format(Locale.getDefault(), "%.3f", d.refuel)
-        holder.consumed.text = String.format(Locale.getDefault(), "%.3f", d.consumed)
-        holder.endFuel.text = String.format(Locale.getDefault(), "%.3f", d.endFuel)
+        holder.odometer.text = d.odometer.formatSmart()
+        holder.mileage.text = d.mileage.formatSmart()
+        holder.startFuel.text = d.startFuel.formatSmart()
+        holder.refuel.text = d.refuel.formatSmart()
+        holder.consumed.text = d.consumed.formatSmart()
+        holder.endFuel.text = d.endFuel.formatSmart()
         val colorRes = colorForEpochDay(d.epochDay)
         holder.root.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, colorRes))
-        // Всегда чёрный и жирный текст на светлом фоне строки
         val textViews = listOf(holder.date, holder.odometer, holder.mileage,
             holder.startFuel, holder.refuel, holder.consumed, holder.endFuel)
         textViews.forEach { it.setTextColor(Color.BLACK) }
