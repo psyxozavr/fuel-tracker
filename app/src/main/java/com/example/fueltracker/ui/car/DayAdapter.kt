@@ -1,5 +1,6 @@
 package com.example.fueltracker.ui.car
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,6 +45,9 @@ class DayAdapter(
         )
         val colorRes = colorForEpochDay(d.epochDay)
         holder.root.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, colorRes))
+        // Всегда чёрный и жирный текст на светлом фоне карточки
+        holder.date.setTextColor(Color.BLACK)
+        holder.details.setTextColor(Color.BLACK)
         holder.itemView.setOnClickListener { onClick(d) }
     }
 
